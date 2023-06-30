@@ -18,8 +18,12 @@ log = logging.getLogger("parser")
 
 
 class Client:
+    # Если нужно добавить какую-то категорию, то вписываем в этот кортеж
+    # (ссылка, название)
     categories = (("https://www.ozon.ru/category/protsessory-15726/", "Процессоры"),
                   ('https://www.ozon.ru/category/smartfony-15502/', 'Смартфоны'))
+    # Если хотите рискнуть и изменить количество странц для парсинга, то это можно сделать тут
+    pages = 5
 
     def __init__(self):
         self.driver = uc.Chrome(service=Service(ChromeDriverManager().install()), headless=True,
@@ -33,7 +37,7 @@ class Client:
             for category, name in self.categories:
                 product_urls = []
                 product_prices = []
-                for i in range(5):
+                for i in range(self.pages):
                     url = category
                     if i != 0:
                         url += f'?page={i + 1}'
@@ -41,7 +45,7 @@ class Client:
                     time.sleep(1)
                     product_url = list(map(lambda x: x.get_attribute("href"),
                                            self.driver.find_elements(By.CLASS_NAME, 'tile-hover-target.i3l.il4')))
-                    while len(product_url) < 20 and i != 4:
+                    while len(product_url) != 0 and len(product_url) < 20 and i != self.pages - 1:
                         time.sleep(1)
                         product_url = list(map(lambda x: x.get_attribute("href"),
                                                self.driver.find_elements(By.CLASS_NAME, 'tile-hover-target.i3l.il4')))

@@ -79,4 +79,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    input('')
+    input('\n\nДля выхода нажмите любую клавишу: ')

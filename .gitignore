@@ -3,3 +3,4 @@ source/cookie
 *.log
 *.json
 source/__pycache__/
+*.rar
