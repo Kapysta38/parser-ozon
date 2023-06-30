@@ -73,7 +73,7 @@ def main():
         save_result(result)
         print('Парсер успешно завершил работу')
     except Exception as ex:
-        print('Произошла ошибка, необходимо посмотреть файл log.log')
+        print('Произошла ошибка, необходимо посмотреть файл log_client.log')
         log.error({'error': ex, 'traceback': traceback.format_exc()})
 
 

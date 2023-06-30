@@ -31,7 +31,8 @@ class Client:
         try:
             result = []
             for category, name in self.categories:
-                urls = []
+                product_urls = []
+                product_prices = []
                 for i in range(5):
                     url = category
                     if i != 0:
@@ -47,8 +48,9 @@ class Client:
 
                     product_price = list(map(lambda x: x.text.split("₽")[0].replace('\u2009', ''),
                                              self.driver.find_elements(By.CLASS_NAME, 'oi6')))
-                    urls.extend((product_url, product_price))
-                result.append((urls, name))
+                    product_urls.extend(product_url)
+                    product_prices.extend(product_price)
+                result.append(((product_urls, product_prices), name))
             return result
         except Exception as ex:
             print('Произошла ошибка внутри селениума, необходимо посмотреть файл log_client.log')
