@@ -1,0 +1,5 @@
+.idea
+source/cookie
+*.log
+*.json
+source/__pycache__/
